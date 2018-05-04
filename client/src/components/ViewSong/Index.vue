@@ -31,7 +31,6 @@ import YouTube from "./YouTube";
 import Lyrics from "./Lyrics";
 import Tab from "./Tab";
 import SongsService from "@/services/SongsService";
-import Panel from "@/components/Panel";
 
 export default {
   data () {
@@ -45,7 +44,6 @@ export default {
     // console.log(this.song);
   },
   components: {
-    Panel,
     SongMetadata,
     YouTube,
     Lyrics,
