@@ -51,18 +51,14 @@ import { mapState } from "vuex";
 import BookmarksService from "@/services/BookmarksService";
 
 export default {
-  props: [
-    'song'
-  ],
+  props: ["song"],
   data () {
     return {
       bookmark: null
     };
   },
   computed: {
-    ...mapState([
-      'isUserLoggedIn'
-    ])
+    ...mapState(["isUserLoggedIn", "user"])
   },
   watch: {
     async song () {
@@ -70,10 +66,12 @@ export default {
         return;
       }
       try {
-        this.bookmark = (await BookmarksService.index({
-          songId: this.song.id,
-          userId: this.$store.state.user.id
+        const bookmarks = (await BookmarksService.index({
+          songId: this.song.id
         })).data;
+        if (bookmarks.length) {
+          this.bookmark = bookmarks[0];
+        }
       } catch (err) {
         console.log("An error occurred trying to fetch your bookmark.", err);
       }
@@ -83,8 +81,7 @@ export default {
     async setAsBookmark () {
       try {
         this.bookmark = (await BookmarksService.post({
-          songId: this.song.id,
-          userId: this.$store.state.user.id
+          songId: this.song.id
         })).data;
       } catch (err) {
         console.log("An error occurred trying to save your bookmark.", err);

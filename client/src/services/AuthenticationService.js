@@ -11,5 +11,5 @@ export default {
 
 // AuthenticationService.register({
 //   email: 'testing@gmail.com',
-//   password: '123456'
+//   password: '12345678'
 // });
